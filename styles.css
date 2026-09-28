@@ -242,7 +242,7 @@ svg {
   width: 104px;
   height: 104px;
   flex-shrink: 0;
-  background: var(--paper);
+  background: transparent;
   padding: 8px;
   display: grid;
   place-items: center;
