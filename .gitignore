@@ -1,0 +1,19 @@
+.tools/
+.qa/
+node_modules/
+.cache/
+__pycache__/
+*.pyc
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+dist/
+build/
+out/
+release/
+# Raw client production archive stays local; published derivatives are in assets/web.
+/assets/imgs/Clientes/
+

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /.qa/
+Disallow: /.tools/
+Sitemap: https://bravobrconsultoria.com.br/sitemap.xml

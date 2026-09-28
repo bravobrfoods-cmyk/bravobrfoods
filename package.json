@@ -1,0 +1,13 @@
+{
+  "name": "bravo-br-foods",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site oficial da Bravo BR Foods — estratégia, vendas, marketing e operação.",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "check": "node --check app.js && node --check server.mjs && node check.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
