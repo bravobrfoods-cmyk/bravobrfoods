@@ -6,6 +6,7 @@ Site oficial da Bravo BR Foods. Fontes diretamente na raiz, sem compilação, de
 
 - `npm run dev` — abre servidor local em `http://127.0.0.1:4173`.
 - `npm run check` — valida sintaxe, assets, links internos, estrutura e orçamento do vídeo.
+- Sem npm: `node server.mjs` para a prévia e `node check.mjs` para a validação estrutural.
 - Também pode ser servido por qualquer hospedagem de arquivos estáticos.
 
 ## Arquivos
@@ -30,6 +31,10 @@ Não há formulário, cookies, analytics ou serviços que exijam segredos. Os CT
 Os cases e depoimentos usam exclusivamente as informações fornecidas. Os carrosséis são manuais e aceitam botões, teclado e swipe. A apresentação institucional permanece desabilitada e claramente identificada como “Em breve”; para publicá-la, colocar o PDF nos assets e substituir o botão do componente `.presentation` por um link real.
 
 O vídeo usa versão H.264 otimizada, sem áudio, com fast-start. Em telas abaixo de 768 px, conexão lenta, economia de dados ou movimento reduzido, o site usa poster. Há pausa manual no desktop e pausa automática fora da tela ou em aba oculta.
+
+No desktop, visitantes com movimento reduzido podem escolher reproduzir o vídeo pelo controle explícito. As fontes WOFF2 são locais, sem requisições ao Google Fonts.
+
+Consulte `QA.md` para o escopo e os limites da validação realizada. A sincronização do código no GitHub não configura automaticamente hospedagem ou DNS do domínio.
 
 ## Créditos
 

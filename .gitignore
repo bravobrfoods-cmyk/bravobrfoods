@@ -16,4 +16,3 @@ out/
 release/
 # Raw client production archive stays local; published derivatives are in assets/web.
 /assets/imgs/Clientes/
-

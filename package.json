@@ -9,5 +9,7 @@
     "start": "node server.mjs",
     "check": "node --check app.js && node --check server.mjs && node check.mjs"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }
