@@ -2626,3 +2626,480 @@ dialog::backdrop {
     scroll-margin-top: 10px;
   }
 }
+/* One ecosystem: shared controls and typography, editorial variations by context. */
+.ecosystem-header {
+  gap: 24px;
+}
+.ecosystem-header .brand {
+  width: 156px;
+  height: 110px;
+  padding: 0;
+  position: relative;
+}
+.ecosystem-header .brand img {
+  height: 86px;
+}
+.brand-context {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.17em;
+  line-height: 1.4;
+  font-weight: 700;
+  text-align: center;
+  color: inherit;
+}
+.ecosystem-header .identity-foods {
+  width: 104px;
+}
+.ecosystem-header .identity-empresarial {
+  width: 176px;
+}
+.header-navigation {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.ecosystem-nav {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.ecosystem-nav a {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 0;
+  min-height: 44px;
+  border-bottom: 2px solid transparent;
+}
+.ecosystem-nav a[aria-current] {
+  border-color: var(--red);
+}
+.ecosystem-header .desktop-nav {
+  margin: 0;
+  font-size: 12px;
+  gap: 25px;
+}
+.ecosystem-header.scrolled .brand {
+  height: 78px;
+}
+.ecosystem-header.scrolled .brand img {
+  height: 58px;
+}
+.ecosystem-header.scrolled .header-navigation {
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+.ecosystem-header.scrolled .desktop-nav {
+  display: none;
+}
+.ecosystem-header .header-cta {
+  font-size: 10px;
+  padding: 14px 18px;
+  min-height: 48px;
+}
+.mobile-nav [aria-current] {
+  color: var(--red-hover);
+}
+.mobile-page-links {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+.mobile-page-links a {
+  font-size: 16px;
+}
+body[data-brand] .hero {
+  padding-top: 200px;
+}
+body[data-brand="consultoria"] .hero h1 {
+  font-size: clamp(64px, 7.2vw, 112px);
+}
+body[data-brand="empresarial"] {
+  --paper: #f2f4f1;
+  --cream: #e3e9e6;
+}
+body[data-brand="empresarial"] .hero-shade {
+  background:
+    linear-gradient(90deg, #10232eeb 0%, #152934ad 55%, #15293440),
+    linear-gradient(0deg, #10232eab, transparent 50%);
+}
+body[data-brand="empresarial"] .hero h1 {
+  font-size: clamp(56px, 6.3vw, 98px);
+}
+.ecosystem {
+  background: var(--paper);
+}
+.verticals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.vertical-door {
+  position: relative;
+  min-height: 580px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+}
+.vertical-door > img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -2;
+  transition: transform 0.6s var(--ease);
+}
+.vertical-door:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, #14232cf2 0%, #14232c77 65%, #14232c25);
+}
+.vertical-door > div {
+  padding: 40px;
+  width: 100%;
+}
+.vertical-door h3 {
+  font: 700 clamp(40px, 4.4vw, 66px)/1.02 var(--display);
+  margin: 30px 0 24px;
+}
+.vertical-door h3 em {
+  font: italic 0.92em/1.1 var(--serif);
+}
+.vertical-door p {
+  max-width: 380px;
+  color: #f0f0ee;
+  margin: 0 0 30px;
+  font-size: 16px;
+}
+.vertical-door:hover > img {
+  transform: scale(1.035);
+}
+.door-link {
+  border-top: 1px solid #ffffff70;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.door-link > span {
+  font-size: 28px;
+}
+.ecosystem-note {
+  margin: 28px 0 0;
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 14px;
+}
+body[data-brand="foods"] .brand-row {
+  justify-content: center;
+}
+body[data-brand="foods"] .brand-row a:last-child {
+  grid-column: auto;
+}
+body[data-brand="foods"] .case-status {
+  display: block;
+  margin-top: 20px;
+}
+.review-context {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 320px;
+  margin-top: 24px;
+}
+.bridge-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.bridge-layout > div:last-child {
+  padding-top: 15px;
+}
+.bridge-layout p:not(.eyebrow) {
+  font-size: 18px;
+  color: var(--muted);
+}
+.bridge-layout .text-link {
+  display: flex;
+  justify-content: space-between;
+  max-width: 420px;
+  margin-top: 10px;
+}
+.vertical-bridge {
+  background: var(--cream);
+}
+.commercial-journey {
+  background: #e3e9e6;
+}
+.journey-top {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 55px;
+}
+.journey-top > p {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 450px;
+}
+.journey-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: start;
+}
+.journey-layout figure {
+  margin: 0;
+  position: sticky;
+  top: 125px;
+}
+.journey-layout figure img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  object-position: center 65%;
+}
+.journey-layout figcaption {
+  font-size: 12px;
+  margin-top: 15px;
+  color: var(--muted);
+}
+.journey-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.journey-steps li {
+  display: flex;
+  gap: 25px;
+  padding: 28px 0;
+  border-top: 1px solid #a9b8b9;
+}
+.journey-steps li > span {
+  font: 700 45px/1 var(--display);
+  color: var(--red-hover);
+}
+.journey-steps h3 {
+  font: 700 27px/1.2 var(--display);
+  margin: 0 0 10px;
+}
+.journey-steps p {
+  margin: 0;
+  max-width: 400px;
+}
+body[data-brand="consultoria"] .map-center img {
+  width: 230px;
+  height: 155px;
+}
+body[data-brand] .footer-brand .brand {
+  width: 170px;
+  height: 115px;
+}
+body[data-brand="foods"] .footer-brand .brand {
+  width: 118px;
+  height: 118px;
+}
+.footer-main > div {
+  min-width: 0;
+}
+.footer-main a {
+  overflow-wrap: anywhere;
+}
+body[data-brand] .footer-main {
+  grid-template-columns: 1fr 1.25fr 1fr 0.8fr;
+  gap: 35px;
+}
+/* The institutional masthead keeps the official dark lettering legible without a box around the logo. */
+body[data-brand] .ecosystem-header,
+body[data-brand] .site-footer {
+  background: var(--paper);
+  color: var(--ink);
+}
+body[data-brand="consultoria"] .ecosystem-header {
+  padding-block: 8px;
+}
+body[data-brand] .footer-main > div > a:not(.brand),
+body[data-brand] .footer-main address,
+body[data-brand] .footer-bottom {
+  color: var(--muted);
+}
+body[data-brand] .footer-bottom {
+  border-color: var(--line);
+}
+body[data-brand] .footer-main a:hover {
+  color: var(--red-hover);
+}
+@media (max-width: 1150px) {
+  .ecosystem-header .header-cta {
+    display: none;
+  }
+  .vertical-door > div {
+    padding: 28px;
+  }
+  .vertical-door {
+    min-height: 530px;
+  }
+  .journey-layout {
+    gap: 40px;
+  }
+  body[data-brand] .footer-main {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+  }
+}
+@media (max-width: 850px) {
+  .header-navigation {
+    display: none;
+  }
+  .ecosystem-header .menu-toggle {
+    margin-left: auto;
+  }
+  .ecosystem-header .brand,
+  .ecosystem-header.scrolled .brand {
+    height: 76px;
+    width: 124px;
+  }
+  .ecosystem-header .brand img,
+  .ecosystem-header.scrolled .brand img {
+    height: 56px;
+  }
+  .ecosystem-header .identity-foods {
+    width: 90px;
+  }
+  body[data-brand="consultoria"] .ecosystem-header:not(.scrolled) .brand {
+    height: 76px;
+    background: transparent;
+    padding: 0;
+  }
+  .brand-context {
+    font-size: 9px;
+  }
+  .vertical-door {
+    min-height: 500px;
+  }
+  .vertical-door h3 {
+    font-size: 44px;
+  }
+  .verticals {
+    gap: 18px;
+  }
+  .bridge-layout,
+  .journey-top {
+    gap: 30px;
+  }
+  .journey-layout {
+    grid-template-columns: 0.9fr 1fr;
+    gap: 30px;
+  }
+  .journey-layout figure img {
+    height: 470px;
+  }
+  .journey-steps li {
+    gap: 16px;
+    padding: 20px 0;
+  }
+  body[data-brand] .hero {
+    padding-top: 170px;
+  }
+}
+@media (max-width: 600px) {
+  .ecosystem-header {
+    min-height: 88px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  body[data-brand] .hero {
+    padding-top: 155px;
+  }
+  body[data-brand="consultoria"] .hero h1 {
+    font-size: clamp(48px, 11.7vw, 70px);
+  }
+  body[data-brand="empresarial"] .hero h1 {
+    font-size: clamp(42px, 10.7vw, 66px);
+  }
+  .verticals,
+  .bridge-layout,
+  .journey-top,
+  .journey-layout {
+    grid-template-columns: 1fr;
+  }
+  .vertical-door {
+    min-height: 480px;
+  }
+  .vertical-door > div {
+    padding: 28px 24px;
+  }
+  .vertical-door h3 {
+    font-size: 51px;
+  }
+  .vertical-door p {
+    font-size: 16px;
+  }
+  .ecosystem-note {
+    font-size: 13px;
+  }
+  .journey-top {
+    margin-bottom: 30px;
+    gap: 22px;
+  }
+  .journey-top > p {
+    font-size: 16px;
+    margin: 0;
+  }
+  .journey-layout figure {
+    position: static;
+  }
+  .journey-layout figure img {
+    height: 310px;
+  }
+  .journey-steps li {
+    padding: 25px 0;
+  }
+  .bridge-layout {
+    gap: 20px;
+  }
+  .bridge-layout p:not(.eyebrow) {
+    font-size: 16px;
+  }
+  body[data-brand] .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 20px;
+  }
+  body[data-brand] .footer-brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  body[data-brand] .footer-brand .brand {
+    margin: 0;
+  }
+  body[data-brand] .hero-bottom > span {
+    max-width: 145px;
+  }
+  .ecosystem-header .mobile-nav {
+    max-height: calc(100svh - 88px);
+    overflow-y: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vertical-door > img {
+    transition: none;
+  }
+  .vertical-door:hover > img {
+    transform: none;
+  }
+}

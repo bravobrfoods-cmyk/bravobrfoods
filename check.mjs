@@ -1,6 +1,17 @@
 import { readFileSync, existsSync, statSync } from "node:fs";
 import assert from "node:assert/strict";
-const pages = ["index.html", "privacidade.html", "404.html"];
+const pages = [
+  "index.html",
+  "foods.html",
+  "empresarial.html",
+  "privacidade.html",
+  "404.html",
+];
+const routes = {
+  "/": "index.html",
+  "/foods": "foods.html",
+  "/empresarial": "empresarial.html",
+};
 for (const file of pages) {
   const html = readFileSync(file, "utf8");
   assert.equal((html.match(/<h1\b/g) || []).length, 1, `${file}: needs one h1`);
@@ -15,10 +26,17 @@ for (const file of pages) {
       assert(ids.includes(url.slice(1)), `${file}: missing anchor ${url}`);
       continue;
     }
+    const [pathname, anchor] = url.split("#");
     const path =
-      url === "/" || url === "./" ? "index.html" : url.replace(/^\//, "");
+      routes[pathname] ||
+      (pathname === "./" ? "index.html" : pathname.replace(/^\//, ""));
     assert(existsSync(path), `${file}: missing ${path}`);
     assert(statSync(path).size > 0, `${file}: empty ${path}`);
+    if (anchor)
+      assert(
+        readFileSync(path, "utf8").includes(`id="${anchor}"`),
+        `${file}: missing cross-page anchor ${url}`,
+      );
   }
   for (const m of html.matchAll(/<img\b[^>]*>/g)) {
     assert(/\balt=/.test(m[0]), `${file}: image without alt`);
@@ -31,6 +49,12 @@ for (const file of pages) {
     /<script type="application\/ld\+json">([^<]+)<\/script>/g,
   ))
     JSON.parse(m[1]);
+  for (const m of html.matchAll(/aria-controls="([^"]+)"/g))
+    assert(ids.includes(m[1]), `${file}: missing panel ${m[1]}`);
+  assert(
+    !/foods@bravobr\.com\.br|instagram\.com\/bravobrfoods/.test(html),
+    `${file}: retired contact`,
+  );
 }
 const html = readFileSync("index.html", "utf8");
 for (const m of html.matchAll(/aria-controls="([^"]+)"/g))
@@ -41,7 +65,7 @@ assert(
 );
 assert.match(html, /bravobrconsultoria.com.br/);
 assert(
-  statSync("assets/videos/hero-web.mp4").size < 3 * 1024 * 1024,
+  statSync("assets/foods/videos/hero-web.mp4").size < 3 * 1024 * 1024,
   "Hero exceeds budget",
 );
 console.log(

@@ -1,47 +1,52 @@
-# Bravo BR Foods
+# Bravo BR Consultoria
 
-Site oficial da Bravo BR Foods. Fontes diretamente na raiz, sem compilação, dependências de produção ou pasta de saída.
+Um ecossistema digital, duas especializações. HTML estático, CSS e JavaScript compartilhados, sem dependências de produção ou pasta de compilação.
+
+## Rotas
+
+| URL            | Fonte              | Papel                                          |
+| -------------- | ------------------ | ---------------------------------------------- |
+| `/`            | `index.html`       | Institucional completo da Bravo BR Consultoria |
+| `/foods`       | `foods.html`       | Restaurantes e negócios gastronômicos          |
+| `/empresarial` | `empresarial.html` | Empresas, comércio e prestadores de serviços   |
+
+`styles.css` mantém o sistema visual e as variações de cada vertical. `app.js` compartilha navegação, vídeo adaptativo, tabs, interações e dados dos cases. As páginas são fontes editáveis na raiz; não é necessário gerar arquivos para trabalhar no site.
 
 ## Prévia e validação
 
-- `npm run dev` — abre servidor local em `http://127.0.0.1:4173`.
-- `npm run check` — valida sintaxe, assets, links internos, estrutura e orçamento do vídeo.
-- Sem npm: `node server.mjs` para a prévia e `node check.mjs` para a validação estrutural.
-- Também pode ser servido por qualquer hospedagem de arquivos estáticos.
+- `node server.mjs` — prévia em `http://127.0.0.1:4173`, incluindo as três rotas e os redirecionamentos canônicos.
+- `node check.mjs` — valida páginas, âncoras locais e entre rotas, imagens, metadados, contatos e estrutura.
+- `node --check app.js` e `node --check server.mjs` — validação de sintaxe.
+- Os mesmos comandos estão disponíveis pelos scripts de `package.json`, quando npm estiver instalado.
 
-## Arquivos
+## Conteúdo e identidade
 
-- `index.html`: conteúdo e metadados da página principal.
-- `styles.css`: identidade visual, componentes, responsividade e movimento reduzido.
-- `app.js`: navegação, vídeo adaptativo, tabs, cases, depoimentos e modal.
-- `privacidade.html`, `404.html`, `robots.txt`, `sitemap.xml`: páginas de apoio e SEO.
-- `assets/imgs`, `assets/videos`: originais fornecidos, preservados.
-- `assets/web`: versões otimizadas usadas no site, sem modificar os originais.
-- O arquivo bruto de clientes em `assets/imgs/Clientes` é preservado localmente e ignorado no Git: inclui cerca de 600 MB de vídeos, fotos de alta resolução, PDFs de impressão e ZIPs. Todas as mídias utilizadas no site estão versionadas em `assets/web`; o site funciona integralmente após clonar o repositório.
-- `assets/fonts`: fontes locais e licenças OFL.
+A Consultoria reúne posicionamento, soluções transversais, método e provas sociais de todo o ecossistema. A Foods concentra cardápio, delivery, marketing e operação gastronômica. A Empresarial desenvolve presença local, canais, atendimento e organização comercial. Consulte `ARCHITECTURE.md` para o mapa editorial.
+
+Contatos únicos: `consultoria@bravobr.com.br`, `@bravobrconsultoria` e WhatsApp `+55 (19) 98119-8188`. Os links de WhatsApp identificam a experiência visitada na mensagem inicial, sem enviar nada automaticamente.
+
+Os depoimentos originais mantêm as referências históricas à Bravo BR Foods, com contexto explícito. Não há resultados numéricos, estrelas, funcionários ou clientes inventados. A apresentação institucional permanece desabilitada até existir um PDF real.
+
+## Assets
+
+- `assets/consultoria`, `assets/foods` e `assets/empresarial`: organização fornecida pelo responsável, com originais preservados.
+- `assets/web`: derivados leves para publicação; logos oficiais sem redesenho, imagens WebP e vídeos H.264 sem áudio.
+- `assets/fonts`: fontes WOFF2 locais e licenças OFL.
+- As pastas `assets/foods/clients` e `assets/empresarial/clients` são arquivos de produção locais, ignorados no Git. Todas as mídias usadas nas páginas estão versionadas em `assets/web`. Um clone contém tudo que é necessário para executar o site.
+- `prepare-media.py` e `inspect-assets.py`: utilitários opcionais de mídia, com Pillow e imageio-ffmpeg; pypdfium2 é usado na inspeção de PDFs. Não são necessários para executar o site.
 
 ## Publicação
 
-Domínio informado: `https://bravobrconsultoria.com.br`. Publicar `index.html`, `styles.css`, `app.js`, `privacidade.html`, `404.html`, `robots.txt`, `sitemap.xml`, `assets/web`, `assets/fonts` e `assets/videos/hero-web.mp4`. Não publicar arquivos de desenvolvimento, Git, inspeção ou ferramentas. Configurar a hospedagem para responder HTTP 404 com `404.html` em endereços inexistentes; não reescrever tudo para a homepage.
+Domínio: `https://bravobrconsultoria.com.br`.
 
-Não há formulário, cookies, analytics ou serviços que exijam segredos. Os CTAs abrem o WhatsApp com a mensagem fornecida. O envio depende da ação do visitante.
+Publicar apenas `index.html`, `foods.html`, `empresarial.html`, `styles.css`, `app.js`, `privacidade.html`, `404.html`, `robots.txt`, `sitemap.xml`, os arquivos de `assets/web`, as fontes WOFF2 e suas licenças, e `assets/foods/videos/hero-web.mp4`. Não publicar `.git`, `.qa`, `.tools`, scripts de desenvolvimento ou arquivos brutos de clientes.
 
-## Conteúdo e manutenção
+A hospedagem deve mapear `/foods` para `foods.html` e `/empresarial` para `empresarial.html`, responder 404 real com `404.html` para URLs desconhecidas e redirecionar os caminhos com extensão/barra final para as URLs canônicas. O arquivo `.htaccess` fornece essas regras para Apache com mod_rewrite e AllowOverride habilitados. Em outros provedores, aplicar as regras equivalentes. Não reescrever todos os endereços para a homepage.
 
-Os cases e depoimentos usam exclusivamente as informações fornecidas. Os carrosséis são manuais e aceitam botões, teclado e swipe. A apresentação institucional permanece desabilitada e claramente identificada como “Em breve”; para publicá-la, colocar o PDF nos assets e substituir o botão do componente `.presentation` por um link real.
-
-O vídeo usa versão H.264 otimizada, sem áudio, com fast-start. Em telas abaixo de 768 px, conexão lenta, economia de dados ou movimento reduzido, o site usa poster. Há pausa manual no desktop e pausa automática fora da tela ou em aba oculta.
-
-No desktop, visitantes com movimento reduzido podem escolher reproduzir o vídeo pelo controle explícito. As fontes WOFF2 são locais, sem requisições ao Google Fonts.
-
-Consulte `QA.md` para o escopo e os limites da validação realizada. A sincronização do código no GitHub não configura automaticamente hospedagem ou DNS do domínio.
+O servidor Node incluído é uma prévia local. O push ao GitHub não configura DNS, TLS ou hospedagem. Não há cookies, pixels, analytics, cadastro ou formulário no código atual.
 
 ## Créditos
 
-Logo e materiais de clientes fornecidos pela Bravo BR Foods. Cenas institucionais derivadas do vídeo local; nenhuma pessoa é apresentada como integrante da Bravo.
+Logos, vídeos institucionais e materiais de clientes fornecidos pela Bravo. Pessoas em cenas ilustrativas não são apresentadas como funcionários da empresa.
 
-Fotografia gastronômica ilustrativa: Jason Edwards, [Unsplash](https://unsplash.com/photos/cooked-dish-on-white-ceramic-plate-ip5OlSjG88I), [licença Unsplash](https://unsplash.com/license). Arquivo local `assets/web/gastronomia-original.jpg`; versões WebP para a página.
-
-Tipografia: Barlow Condensed e DM Sans, Google Fonts. Licenças OFL em `assets/fonts`.
-
-`inspect-assets.py` e `prepare-media.py` são utilitários de manutenção (Pillow, imageio-ffmpeg e pypdfium2 para inspeção de PDFs). `.qa` e `.tools` são locais e ignorados pelo Git.
+Fotografia gastronômica ilustrativa: Jason Edwards, [Unsplash](https://unsplash.com/photos/cooked-dish-on-white-ceramic-plate-ip5OlSjG88I), [licença](https://unsplash.com/license). Tipografia: Barlow Condensed e DM Sans, licenças OFL em `assets/fonts`.

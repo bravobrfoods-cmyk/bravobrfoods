@@ -31,12 +31,31 @@ createServer((req, res) => {
     res.writeHead(400).end();
     return;
   }
+  const routes = {
+    "/": "/index.html",
+    "/foods": "/foods.html",
+    "/empresarial": "/empresarial.html",
+  };
+  const canonical = {
+    "/index.html": "/",
+    "/foods.html": "/foods",
+    "/foods/": "/foods",
+    "/empresarial.html": "/empresarial",
+    "/empresarial/": "/empresarial",
+  };
+  if (canonical[pathname]) {
+    res.writeHead(301, { Location: canonical[pathname] }).end();
+    return;
+  }
+  pathname = routes[pathname] || pathname;
   const path = resolve(
     root,
     "." + (pathname === "/" ? "/index.html" : pathname),
   );
   const allowed = [
     "index.html",
+    "foods.html",
+    "empresarial.html",
     "privacidade.html",
     "404.html",
     "styles.css",
@@ -93,5 +112,5 @@ createServer((req, res) => {
     else createReadStream(path).pipe(res);
   }
 }).listen(4173, "127.0.0.1", () =>
-  console.log("Bravo BR Foods: http://127.0.0.1:4173"),
+  console.log("Bravo BR Consultoria: http://127.0.0.1:4173"),
 );

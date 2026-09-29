@@ -1,10 +1,16 @@
 const $ = (s, root = document) => root.querySelector(s);
 const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+const currentBrand =
+  {
+    consultoria: "Bravo BR Consultoria",
+    foods: "Bravo BR Foods",
+    empresarial: "Bravo BR Empresarial",
+  }[document.body.dataset.brand] || "Bravo BR Consultoria";
 const whatsapp =
   "https://wa.me/5519981198188?text=" +
   encodeURIComponent(
-    "Olá! Conheci a Bravo BR Foods pelo site e gostaria de entender como vocês podem ajudar meu negócio.",
+    `Olá! Conheci a ${currentBrand} pelo site e gostaria de entender como vocês podem ajudar meu negócio.`,
   );
 $$("[data-whatsapp]").forEach((a) => (a.href = whatsapp));
 const header = $("#header"),
@@ -133,6 +139,10 @@ if (video) {
   });
 }
 const topics = {
+  Oferta:
+    "organizar produtos, serviços e apresentação para facilitar a decisão de compra.",
+  Canais:
+    "conectar presença digital, pontos de contato e atendimento à realidade do negócio.",
   Marketing: "atrair o público certo com uma comunicação conectada à venda.",
   Vendas:
     "transformar interesse em pedidos com uma jornada comercial bem estruturada.",
@@ -191,7 +201,7 @@ setupTabs(".method-tabs");
 setupTabs(".solution-tabs");
 const methodLayout = window.matchMedia("(max-width: 850px)");
 function updateMethodOrientation() {
-  $(".method-tabs").setAttribute(
+  $(".method-tabs")?.setAttribute(
     "aria-orientation",
     methodLayout.matches ? "horizontal" : "vertical",
   );
@@ -217,6 +227,10 @@ $$("[data-matrix]").forEach((b) =>
   }),
 );
 const flows = {
+  orcamento:
+    "Vamos entender sua necessidade e organizar as informações para uma pessoa da equipe preparar o atendimento.",
+  informacao:
+    "Vamos apresentar as informações do negócio e encaminhar sua dúvida para a equipe responsável.",
   delivery:
     "Para delivery, vamos confirmar a região de entrega. Depois, uma pessoa da equipe acompanha seu pedido.",
   retirada:
@@ -307,19 +321,27 @@ let caseIndex = 0,
 const caseSlides = $$("[data-case]"),
   reviews = $$("[data-review]");
 function showCase(n) {
+  if (!caseSlides.length) return;
   caseIndex = (n + caseSlides.length) % caseSlides.length;
   caseSlides.forEach((s, i) => (s.hidden = i !== caseIndex));
-  $$("[data-case-go]").forEach((b, i) =>
-    b.setAttribute("aria-pressed", String(i === caseIndex)),
+  const caseId = Number(caseSlides[caseIndex].dataset.case);
+  $$("[data-case-go]").forEach((b) =>
+    b.setAttribute("aria-pressed", String(Number(b.dataset.caseGo) === caseId)),
   );
   $(".case-status").textContent =
-    `${caseData[caseIndex].name} · ${caseIndex + 1} de ${caseSlides.length}`;
+    `${caseData[caseId].name} · ${caseIndex + 1} de ${caseSlides.length}`;
+}
+function selectCase(id) {
+  const index = caseSlides.findIndex(
+    (slide) => Number(slide.dataset.case) === id,
+  );
+  if (index >= 0) showCase(index);
 }
 $$("[data-case-go]").forEach((b) =>
-  b.addEventListener("click", () => showCase(Number(b.dataset.caseGo))),
+  b.addEventListener("click", () => selectCase(Number(b.dataset.caseGo))),
 );
 $$("[data-client]").forEach((a) =>
-  a.addEventListener("click", () => showCase(Number(a.dataset.client))),
+  a.addEventListener("click", () => selectCase(Number(a.dataset.client))),
 );
 $("[data-case-prev]")?.addEventListener("click", () => showCase(caseIndex - 1));
 $("[data-case-next]")?.addEventListener("click", () => showCase(caseIndex + 1));
@@ -377,7 +399,7 @@ $$("[data-case-detail]").forEach((b) =>
     const c = caseData[Number(b.dataset.caseDetail)];
     dialogTrigger = b;
     $("#dialog-content").innerHTML =
-      `<div class="dialog-body"><p class="eyebrow">Case real / ${c.category}</p><h2 id="dialog-title">${c.name}</h2><img src="assets/web/${c.image}-1280.webp" alt="${c.alt}" width="1280" height="720"><div class="before-after"><div><span>ANTES</span><p>${c.before}</p></div><div><span>DEPOIS</span><p>${c.after}</p></div></div><h3>O QUE FOI FEITO</h3><ul>${c.actions.map((a) => `<li>${a}</li>`).join("")}</ul><p>${c.ongoing}</p><a class="button" href="${whatsapp}">Conversar sobre meu negócio <span aria-hidden="true">↗</span></a></div>`;
+      `<div class="dialog-body"><p class="eyebrow">Case real / ${c.category}</p><h2 id="dialog-title">${c.name}</h2><img src="/assets/web/${c.image}-1280.webp" alt="${c.alt}" width="1280" height="720"><div class="before-after"><div><span>ANTES</span><p>${c.before}</p></div><div><span>DEPOIS</span><p>${c.after}</p></div></div><h3>O QUE FOI FEITO</h3><ul>${c.actions.map((a) => `<li>${a}</li>`).join("")}</ul><p>${c.ongoing}</p><a class="button" href="${whatsapp}">Conversar sobre meu negócio <span aria-hidden="true">↗</span></a></div>`;
     dialog.showModal();
     document.body.classList.add("modal-open");
     $(".dialog-close").focus();

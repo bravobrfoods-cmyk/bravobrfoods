@@ -1,9 +1,9 @@
 {
-  "name": "bravo-br-foods",
+  "name": "bravo-br-consultoria",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Site oficial da Bravo BR Foods — estratégia, vendas, marketing e operação.",
+  "description": "Ecossistema digital da Bravo BR Consultoria — estratégia, vendas, marketing e operação.",
   "scripts": {
     "dev": "node server.mjs",
     "start": "node server.mjs",
