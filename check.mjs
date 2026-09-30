@@ -55,6 +55,36 @@ for (const file of pages) {
     !/foods@bravobr\.com\.br|instagram\.com\/bravobrfoods/.test(html),
     `${file}: retired contact`,
   );
+  for (const match of html.matchAll(/(?:srcset|imagesrcset)="([^"]+)"/g)) {
+    for (const entry of match[1].split(",")) {
+      const asset = entry.trim().split(/\s+/)[0].replace(/^\//, "");
+      assert(existsSync(asset), `${file}: missing responsive asset ${asset}`);
+    }
+  }
+}
+for (const [route, file] of Object.entries(routes)) {
+  const page = readFileSync(file, "utf8");
+  assert(
+    page.includes(`href="https://bravobrconsultoria.com.br${route}"`),
+    `${file}: canonical route`,
+  );
+  const caseIds = [...page.matchAll(/data-case="(\d+)"/g)].map(
+    (match) => match[1],
+  );
+  const expected =
+    route === "/foods"
+      ? ["1"]
+      : route === "/empresarial"
+        ? ["0", "2", "3"]
+        : ["0", "1", "2", "3"];
+  assert.deepEqual(caseIds, expected, `${file}: editorial case selection`);
+  for (const match of page.matchAll(
+    /data-(?:case-go|case-detail|client)="(\d+)"/g,
+  ))
+    assert(
+      caseIds.includes(match[1]),
+      `${file}: control points to an absent case`,
+    );
 }
 const html = readFileSync("index.html", "utf8");
 for (const m of html.matchAll(/aria-controls="([^"]+)"/g))
@@ -63,6 +93,11 @@ assert(
   !/aggregateRating|ratingValue|reviewCount/.test(html),
   "No unverified ratings",
 );
+for (const brand of ["consultoria", "empresarial"])
+  assert(
+    statSync(`assets/web/${brand}-hero.mp4`).size < 3 * 1024 * 1024,
+    `${brand}: hero exceeds budget`,
+  );
 assert.match(html, /bravobrconsultoria.com.br/);
 assert(
   statSync("assets/foods/videos/hero-web.mp4").size < 3 * 1024 * 1024,

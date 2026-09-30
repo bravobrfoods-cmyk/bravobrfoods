@@ -7,7 +7,7 @@ import imageio_ffmpeg
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 root = Path('assets')
 out = Path('.qa'); out.mkdir(exist_ok=True)
-files = sorted(p for p in root.rglob('*') if p.suffix.lower() in ['.png','.jpg','.jpeg','.webp'])
+files = sorted(p for p in root.rglob('*') if 'web' not in p.parts and p.suffix.lower() in ['.png','.jpg','.jpeg','.webp'])
 font_path = 'C:/Windows/Fonts/arial.ttf'
 from PIL import ImageFont
 font = ImageFont.truetype(font_path, 13)
@@ -27,6 +27,7 @@ for batch in range(0,len(files),20):
     sheet.save(out/f'images-{batch//20}.jpg')
 ffmpeg=imageio_ffmpeg.get_ffmpeg_exe()
 for i,p in enumerate(root.rglob('*.mp4')):
+    if 'web' in p.parts or p.name == 'hero-web.mp4': continue
     info=subprocess.run([ffmpeg,'-i',str(p)],capture_output=True,text=True).stderr
     (out/f'video-{i}.txt').write_text(str(p)+'\n'+info,encoding='utf-8')
     import re
